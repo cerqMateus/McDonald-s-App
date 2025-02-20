@@ -1,12 +1,14 @@
 "use client"
 
-import { MenuCategory, Prisma } from "@prisma/client";
+import {  Prisma } from "@prisma/client";
 import { ClockIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
+import Products from "./products";
 
 interface RestaurantCategoriesProps{
     restaurant : Prisma.RestaurantGetPayload<{
@@ -18,15 +20,19 @@ interface RestaurantCategoriesProps{
     }>
 }
 
+type MenuCategoriesWithProducts = Prisma.MenuCategoryGetPayload<{
+    include: {products:true}
+}>
+
 const RestaurantCategories = ({restaurant}:RestaurantCategoriesProps) => {
     
-    const [selectedCategory, setSelectedCategory] = useState<MenuCategory>(restaurant.menuCategories[0]);
-    const handleCategoryClick = (category:MenuCategory) => {
+    const [selectedCategory, setSelectedCategory] = useState<MenuCategoriesWithProducts>(restaurant.menuCategories[0]);
+    const handleCategoryClick = (category:MenuCategoriesWithProducts) => {
         setSelectedCategory(category)
     }
 
     return (  
-        <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl border bg-white">
+        <div className="relative z-50 mt-[-1.5rem] rounded-t-3xl bg-white">
             <div className="p-5">
             <div className="flex items-center gap-3 ">
                 <Image 
@@ -58,7 +64,9 @@ const RestaurantCategories = ({restaurant}:RestaurantCategoriesProps) => {
                         ))}
                     </div>
                     <ScrollBar orientation="horizontal"/>
+                    <h3 className="px-5 font-semibold pt-2">{selectedCategory.name}</h3>
                 </ScrollArea>
+                <Products products={selectedCategory.products}></Products>
         </div>
 
         
