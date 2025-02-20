@@ -1,7 +1,9 @@
-import Image from "next/image";
+
 import { notFound } from "next/navigation";
 
 import { getRestaurantBySlug } from "@/data/get-element-by-slug";
+
+import RestauranteHeader from "./componentes/header";
 
 interface RestaurantMenuPageProps {
     params: Promise<{ slug: string }>;
@@ -25,14 +27,7 @@ const RestaurantMenuPage = async ({params, searchParams} : RestaurantMenuPagePro
     }
     return (
         <div>
-            <div className="relative h-[250px] w-full">
-                <Image
-                    src={restaurant?.avatarImageURL}
-                    alt={restaurant?.name}
-                    fill
-                    className="object-cover"    
-                ></Image>
-            </div>
+            <RestauranteHeader restaurant={restaurant}/>
         </div>
     );
 }

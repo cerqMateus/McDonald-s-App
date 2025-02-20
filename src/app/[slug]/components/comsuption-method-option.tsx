@@ -25,7 +25,7 @@ const ConsuptionMethodOption = ({imageAlt,imageURL,buttonText,option,slug} : Con
                      alt={imageAlt} 
                      className="object-contain"></Image>
                     </div>
-                    <Button variant="secondary" className="rounded-full">
+                    <Button variant="secondary" className="rounded-full" asChild>
                         <Link href={`/${slug}/menu?consuptionMethod=${option}`}>
                             {buttonText}
                     </Link>    
