@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 
 import { db } from "@/lib/prisma";
 
-import RestaurantCategories from "./componentes/categories";
-import RestauranteHeader from "./componentes/header";
+import RestaurantCategories from "./components/categories";
+import RestauranteHeader from "./components/header";
 
 interface RestaurantMenuPageProps {
     params: Promise<{ slug: string }>;
